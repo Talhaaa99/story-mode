@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 interface ContentSectionProps {
   currentData: {
@@ -16,132 +16,141 @@ interface ContentSectionProps {
     }>;
     visual: string;
     color: string;
+    category?: string;
   };
   isDark: boolean;
 }
 
 export function ContentSection({ currentData, isDark }: ContentSectionProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const visualRef = useRef<HTMLDivElement>(null);
-  const profilesRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
 
+  // Animate description change
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate content entrance with journey effect
-      gsap.fromTo(contentRef.current, 
-        { opacity: 0, y: 100, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" }
-      );
-
-      // Animate floating profile pics
-      gsap.fromTo('.profile-pic', 
-        { scale: 0, rotation: -180, opacity: 0 },
-        { 
-          scale: 1, 
-          rotation: 0, 
-          opacity: 1, 
-          duration: 0.8, 
-          ease: "back.out(1.7)",
-          stagger: 0.2,
-          delay: 0.5
-        }
-      );
-
-      // Floating animation for profile pics
-      gsap.to('.profile-pic', {
-        y: -10,
-        duration: 2,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        stagger: 0.3
-      });
-
-      // Code snippet typing effect
-      gsap.fromTo('.code-snippet', 
-        { width: 0, opacity: 0 },
-        { width: "100%", opacity: 1, duration: 1.5, ease: "none", delay: 0.8 }
-      );
-
-      // Visual metaphor animations based on the year
-      if (currentData.visual === 'car') {
-        // Car zooming animation for 2005
-        gsap.fromTo('.visual-element',
-          { x: -200, opacity: 0, rotate: -10 },
-          { x: 200, opacity: 1, rotate: 0, duration: 2, ease: "power2.out" }
-        );
-      } else if (currentData.visual === 'curtains') {
-        // Colorful curtains animation for 2018
-        gsap.fromTo('.visual-element',
-          { scaleY: 0, transformOrigin: "top" },
-          { scaleY: 1, duration: 1.5, ease: "elastic.out(1, 0.5)" }
-        );
-      } else if (currentData.visual === 'code') {
-        // Typing effect for coding years
-        gsap.fromTo('.visual-element',
-          { width: 0 },
-          { width: "100%", duration: 2, ease: "none" }
-        );
-      } else if (currentData.visual === 'celebration') {
-        // Celebration particles
-        gsap.fromTo('.visual-element',
-          { scale: 0, rotation: 0 },
-          { scale: 1, rotation: 360, duration: 1.5, ease: "back.out(1.7)" }
-        );
-      }
-    });
-
-    return () => ctx.revert();
+    if (descriptionRef.current) {
+      const tl = gsap.timeline();
+      tl.to(descriptionRef.current, {
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
+        ease: "power2.out",
+      })
+        .set(descriptionRef.current, { y: -20 })
+        .to(descriptionRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+    }
   }, [currentData]);
 
-  const renderVisualMetaphor = () => {
-    switch (currentData.visual) {
-      case 'car':
-        return (
-          <div className="visual-element text-6xl opacity-70">
-            🚗💨
-          </div>
-        );
-      case 'curtains':
-        return (
-          <div className="visual-element w-full h-32 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 rounded-lg opacity-60" />
-        );
-      case 'code':
-        return (
-          <div className="visual-element font-mono text-sm overflow-hidden whitespace-nowrap border-r-2 border-green-500">
-            const life = new Journey(); life.start();
-          </div>
-        );
-      case 'celebration':
-        return (
-          <div className="visual-element text-4xl">
-            🎉✨🎊
-          </div>
-        );
-      case 'rocket':
-        return (
-          <div className="visual-element text-6xl opacity-70">
-            🚀🌟
-          </div>
-        );
-      default:
-        return (
-          <div className="visual-element w-32 h-32 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-60" />
-        );
+  // Animate visual elements (floating, rotation, scale)
+  useEffect(() => {
+    const visualElements =
+      containerRef.current?.querySelectorAll(".visual-element");
+    if (visualElements) {
+      gsap.to(visualElements, {
+        rotation: "random(-5, 5)",
+        scale: "random(0.95, 1.05)",
+        duration: "random(2, 4)",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.2,
+      });
     }
-  };
+  }, []);
+
+  // Helper for category color (fallback to currentData.color)
+  function getCategoryColor(category?: string) {
+    // You can expand this mapping as needed
+    if (!category) return "";
+    switch (category.toLowerCase()) {
+      case "career":
+        return "bg-blue-500";
+      case "education":
+        return "bg-green-500";
+      case "project":
+        return "bg-purple-500";
+      default:
+        return "";
+    }
+  }
 
   return (
-    <div className="content-container h-full flex flex-col justify-center p-8 md:p-16 relative overflow-hidden">
-      {/* Floating Profile Pictures */}
-      <div ref={profilesRef} className="absolute inset-0 pointer-events-none">
+    <div
+      ref={containerRef}
+      className="h-full bg-gradient-to-br from-background to-muted/10 relative overflow-hidden"
+    >
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-grid opacity-10" />
+
+      {/* Content overlay */}
+      <div className="relative z-10 h-full flex flex-col justify-center px-8 lg:px-12">
+        <div className="space-y-8">
+          {/* Main description */}
+          <p
+            ref={descriptionRef}
+            className="text-2xl lg:text-4xl leading-relaxed text-foreground/90 font-light"
+          >
+            {currentData.description}
+          </p>
+
+          {/* Category indicator (if available) */}
+          {currentData.category && (
+            <div className="flex items-center space-x-3">
+              <div
+                className={`w-3 h-3 rounded-full visual-element ${
+                  getCategoryColor(currentData.category) || ""
+                }`}
+                style={{
+                  backgroundColor: !getCategoryColor(currentData.category)
+                    ? currentData.color
+                    : undefined,
+                }}
+              />
+              <span className="text-sm font-mono uppercase tracking-wider text-muted-foreground">
+                {currentData.category}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Code Snippet Window */}
+        <div className="mt-8 p-4 bg-black/30 rounded-lg border border-gray-700/50 backdrop-blur-sm max-w-xl">
+          <div className="flex items-center space-x-2 mb-2">
+            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          </div>
+          <pre className="code-snippet font-mono text-sm text-green-400 overflow-hidden whitespace-pre-wrap">
+            {currentData.codeSnippet}
+          </pre>
+        </div>
+      </div>
+
+      {/* Floating accent elements (visuals) */}
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="visual-element absolute w-1 h-1 bg-primary/20 rounded-full"
+          style={{
+            left: `${20 + Math.random() * 60}%`,
+            top: `${20 + Math.random() * 60}%`,
+          }}
+        />
+      ))}
+
+      {/* Floating Profile Pictures (pfps) */}
+      <div className="absolute inset-0 pointer-events-none">
         {currentData.profilePics.map((profile, index) => (
           <div
             key={index}
             className="profile-pic absolute"
             style={{
-              left: `${20 + (index * 25)}%`,
-              top: `${15 + (index * 20)}%`,
+              left: `${20 + index * 25}%`,
+              top: `${15 + index * 20}%`,
             }}
           >
             <div className="flex items-center space-x-2 bg-black/20 backdrop-blur-sm rounded-full px-3 py-2 border border-white/10">
@@ -153,50 +162,6 @@ export function ContentSection({ currentData, isDark }: ContentSectionProps) {
             </div>
           </div>
         ))}
-      </div>
-
-      <div ref={contentRef} className="max-w-lg">
-        {/* Visual Metaphor */}
-        <div className="mb-8 flex justify-center">
-          {renderVisualMetaphor()}
-        </div>
-        
-        {/* Content */}
-        <div className="space-y-6">
-          <div className="space-y-4 text-lg md:text-xl leading-relaxed opacity-80">
-            {currentData.description.split('\n').map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
-          
-          {/* Code Snippet */}
-          <div className="mt-8 p-4 bg-black/30 rounded-lg border border-gray-700/50 backdrop-blur-sm">
-            <div className="flex items-center space-x-2 mb-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
-            </div>
-            <pre className="code-snippet font-mono text-sm text-green-400 overflow-hidden whitespace-pre-wrap">
-              {currentData.codeSnippet}
-            </pre>
-          </div>
-          
-          {/* Decorative Element */}
-          <div className="flex items-center space-x-4 pt-6">
-            <div 
-              className="w-2 h-2 rounded-full animate-pulse"
-              style={{ backgroundColor: currentData.color }}
-            />
-            <div 
-              className="w-8 h-0.5 rounded-full opacity-50"
-              style={{ backgroundColor: currentData.color }}
-            />
-            <div 
-              className="w-2 h-2 rounded-full animate-pulse"
-              style={{ backgroundColor: currentData.color }}
-            />
-          </div>
-        </div>
       </div>
     </div>
   );
