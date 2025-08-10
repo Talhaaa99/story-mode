@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: { unoptimized: true },
+  // Remove eslint configuration as it's deprecated in Next.js 15
+  // eslint: {
+  //   ignoreDuringBuilds: true,
+  // },
 };
 
 module.exports = nextConfig;

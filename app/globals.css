@@ -2,93 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 10;
+  --background-end-rgb: 0, 0, 0;
+  --neon-pink: #ff00ff;
+  --neon-cyan: #00ffff;
+  --neon-purple: #a020f0;
+  --neon-lime: #00ff66;
+  --cyber-black: #0a0a0a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 10, 10, 10;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
 @layer base {
   :root {
-    /* Core theme colors - Black & White with subtle variations */
-    --background: 0 0% 4%;
+    --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
-
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 0 0% 3%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-
-    /* Primary colors - Bright white for emphasis */
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 4%;
-
-    /* Secondary colors - Subtle grays */
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 90%;
-
-    --muted: 0 0% 8%;
-    --muted-foreground: 0 0% 60%;
-
-    /* Accent colors - Subtle highlights */
-    --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 95%;
-
-    --destructive: 0 84.2% 60.2%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 14%;
-    --input: 0 0% 12%;
-    --ring: 0 0% 90%;
-
-    --radius: 0.25rem;
-
-    /* Futuristic design tokens */
-    --neon-glow: 0 0% 100%;
-    --grid-line: 0 0% 15%;
-    --timeline-line: 0 0% 20%;
-
-    /* Gradients for depth and visual interest */
-    --gradient-primary: linear-gradient(135deg, hsl(0 0% 8%), hsl(0 0% 2%));
-    --gradient-accent: linear-gradient(90deg, hsl(0 0% 15%), hsl(0 0% 8%));
-    --gradient-glow: radial-gradient(circle, hsl(0 0% 100% / 0.1), transparent);
-
-    /* Animation curves for premium feel */
-    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-    /* Sidebar colors */
-    --sidebar-background: 0 0% 6%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 0 0% 100%;
-    --sidebar-primary-foreground: 0 0% 4%;
-    --sidebar-accent: 0 0% 10%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 14%;
-    --sidebar-ring: 0 0% 90%;
-
-    /* Font variables */
-    --font-mono: "JetBrains Mono", "Fira Code", "Monaco", "Consolas",
-      "monospace";
-  }
-
-  .inverted {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 4%;
-    --card: 0 0% 96%;
-    --card-foreground: 0 0% 8%;
-    --primary: 0 0% 4%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 92%;
-    --secondary-foreground: 0 0% 8%;
-    --muted: 0 0% 94%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 0 0% 90%;
-    --accent-foreground: 0 0% 8%;
-    --border: 0 0% 88%;
-    --input: 0 0% 92%;
-    --neon-glow: 0 0% 4%;
-    --grid-line: 0 0% 85%;
-    --timeline-line: 0 0% 80%;
-    --gradient-primary: linear-gradient(135deg, hsl(0 0% 92%), hsl(0 0% 98%));
-    --gradient-accent: linear-gradient(90deg, hsl(0 0% 85%), hsl(0 0% 92%));
-    --gradient-glow: radial-gradient(circle, hsl(0 0% 4% / 0.1), transparent);
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --radius: 0.5rem;
   }
 }
 
@@ -96,129 +50,583 @@
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground font-mono antialiased;
+    @apply bg-background text-foreground;
+    background: #0a0a0a;
+    font-family: var(--font-chakra-petch), monospace;
     overflow-x: hidden;
   }
 
-  /* Futuristic scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--muted));
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--timeline-line));
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--foreground) / 0.7);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-orbitron), monospace;
   }
 }
 
-@layer utilities {
-  /* Animation utilities */
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  /* Background patterns */
-  .bg-grid {
-    background-image: linear-gradient(
-        hsl(var(--grid-line)) 1px,
-        transparent 1px
-      ),
-      linear-gradient(90deg, hsl(var(--grid-line)) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  .bg-dots {
-    background-image: radial-gradient(
-      circle,
-      hsl(var(--grid-line)) 1px,
-      transparent 1px
-    );
-    background-size: 30px 30px;
-  }
-
-  /* Text effects */
-  .text-glow {
-    text-shadow: 0 0 10px hsl(var(--neon-glow) / 0.5);
-  }
-
-  .text-gradient {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--foreground)),
-      hsl(var(--muted-foreground))
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 20px hsl(var(--neon-glow) / 0.2);
-  }
-  to {
-    box-shadow: 0 0 30px hsl(var(--neon-glow) / 0.4);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-/* Smooth scrolling */
+/* Custom styles for THE TALHA FILES */
 html {
   scroll-behavior: smooth;
 }
 
-/* Typography enhancements */
-.font-mono {
-  font-family: var(--font-mono);
+/* Scroll-snap container */
+.snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* React Bits Faulty Terminal Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 0, 255, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(0, 255, 255, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(160, 32, 240, 0.02) 0%,
+      transparent 50%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 255, 0.03) 2px,
+      rgba(0, 255, 255, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 0, 255, 0.02) 2px,
+      rgba(255, 0, 255, 0.02) 4px
+    );
+  pointer-events: none;
+  z-index: -1;
+  animation: faultyTerminal 20s ease-in-out infinite;
+}
+
+@keyframes faultyTerminal {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateX(0);
+  }
+  25% {
+    opacity: 0.4;
+    transform: translateX(1px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-1px);
+  }
+  75% {
+    opacity: 0.4;
+    transform: translateX(0.5px);
+  }
+}
+
+/* Faulty terminal glitch effect */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0, 255, 255, 0.01) 1px,
+    rgba(0, 255, 255, 0.01) 2px
+  );
+  pointer-events: none;
+  z-index: -1;
+  animation: scanlines 0.1s linear infinite;
+}
+
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(2px);
+  }
+}
+
+/* TV Blip-off Animation */
+@keyframes tvBlipOff {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1, 0.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0, 0.05);
+    opacity: 0;
+  }
+}
+
+.tv-blip {
+  animation: tvBlipOff 0.4s ease-in-out forwards;
+  transform-origin: center;
+}
+
+/* Neon text effects */
+.neon-text-pink {
+  color: var(--neon-pink);
+  text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink),
+    0 0 15px var(--neon-pink), 0 0 20px var(--neon-pink);
+}
+
+.neon-text-cyan {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan),
+    0 0 15px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+}
+
+.neon-text-purple {
+  color: var(--neon-purple);
+  text-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple),
+    0 0 15px var(--neon-purple), 0 0 20px var(--neon-purple);
+}
+
+.neon-text-lime {
+  color: var(--neon-lime);
+  text-shadow: 0 0 5px var(--neon-lime), 0 0 10px var(--neon-lime),
+    0 0 15px var(--neon-lime), 0 0 20px var(--neon-lime);
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch 0.3s ease-in-out infinite;
+  color: var(--neon-cyan);
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch 0.3s ease-in-out infinite reverse;
+  color: var(--neon-pink);
+  z-index: -2;
+}
+
+/* Scanline effect */
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--neon-cyan),
+    transparent
+  );
+  animation: scanline 2s linear infinite;
+  z-index: 10;
+}
+
+/* Floating neon particles */
+.neon-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--neon-pink);
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Cyber rain effect */
+.cyber-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cyber-rain::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 100px;
+  background: linear-gradient(180deg, transparent, var(--neon-cyan));
+  animation: cyber-rain 1s linear infinite;
+}
+
+/* Hacker Mode */
+.hacker-mode {
+  filter: hue-rotate(120deg) saturate(1.5);
+}
+
+.hacker-mode * {
+  color: var(--neon-lime) !important;
+  text-shadow: 0 0 5px var(--neon-lime) !important;
+}
+
+.hacker-mode .neon-text-pink,
+.hacker-mode .neon-text-cyan,
+.hacker-mode .neon-text-purple {
+  color: var(--neon-lime) !important;
+  text-shadow: 0 0 5px var(--neon-lime), 0 0 10px var(--neon-lime),
+    0 0 15px var(--neon-lime), 0 0 20px var(--neon-lime) !important;
+}
+
+.hacker-mode .bg-neon-pink,
+.hacker-mode .bg-neon-cyan,
+.hacker-mode .bg-neon-purple {
+  background-color: var(--neon-lime) !important;
+}
+
+.hacker-mode .border-neon-pink,
+.hacker-mode .border-neon-cyan,
+.hacker-mode .border-neon-purple {
+  border-color: var(--neon-lime) !important;
+}
+
+/* Disco mode */
+.disco-mode {
+  animation: disco-colors 0.5s ease-in-out infinite;
+}
+
+@keyframes disco-colors {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Quirky mode styles */
+.quirky-mode .quirky-bg-overlay {
+  opacity: 0.1 !important;
+  animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Smooth scrolling for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .snap-y {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* Improved scroll performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 10, 10, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-pink), var(--neon-cyan));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+}
+
+/* Loading animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
 }
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
-  .year-display {
-    font-size: 4rem !important;
+  .snap-y {
+    scroll-snap-type: y mandatory;
+  }
+
+  /* Hide HUD on mobile */
+  .fixed.top-0 {
+    display: none;
+  }
+
+  /* Simplify navigation on mobile */
+  .fixed.right-6 {
+    right: 1rem;
+  }
+
+  .fixed.right-6 .space-y-4 > * {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Reduce text sizes on mobile */
+  .text-5xl {
+    font-size: 2.5rem;
+  }
+
+  .text-6xl {
+    font-size: 3rem;
+  }
+
+  .text-7xl {
+    font-size: 3.5rem;
+  }
+
+  .text-8xl {
+    font-size: 4rem;
+  }
+
+  /* Stack content on mobile */
+  .flex.space-x-4 {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Reduce animations on mobile for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Mobile-specific scroll-snap adjustments */
+  .h-screen {
+    height: 100dvh;
+  }
+
+  /* Ensure sections take full viewport on mobile */
+  section {
+    min-height: 100dvh;
+    height: 100dvh;
   }
 }
 
-@media (max-width: 640px) {
-  .year-display {
-    font-size: 3rem !important;
+/* Pixel art popup */
+.pixel-popup {
+  position: fixed;
+  background: var(--cyber-black);
+  border: 2px solid var(--neon-pink);
+  padding: 1rem;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: var(--neon-cyan);
+  z-index: 1000;
+  animation: flicker 0.5s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.pixel-popup::before {
+  content: "█";
+  color: var(--neon-pink);
+  margin-right: 0.5rem;
+}
+
+/* Game UI Elements */
+.game-button {
+  background: var(--cyber-dark-gray);
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-chakra-petch), monospace;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.game-button:hover {
+  background: var(--neon-cyan);
+  color: var(--cyber-black);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+/* Level completion animation */
+@keyframes levelComplete {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
   }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.level-complete {
+  animation: levelComplete 1s ease-out forwards;
+}
+
+/* Terminal typing effect */
+.terminal-cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Fix content visibility issues */
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure content is always visible */
+.relative.z-20 {
+  z-index: 20 !important;
+  position: relative !important;
+}
+
+/* Fix any overflow issues */
+.overflow-hidden {
+  overflow: visible !important;
+}
+
+/* Curtain animation keyframes */
+@keyframes curtainDrop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes curtainSlide {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Ensure proper viewport height on all devices */
+.h-screen {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Prevent horizontal scroll */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure sections are properly sized */
+section[id] {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
