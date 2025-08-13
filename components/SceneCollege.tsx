@@ -43,8 +43,6 @@ export default function SceneCollege({ onComplete }: SceneCollegeProps) {
         id="college"
         gradientFrom="from-neon-lime"
         gradientTo="to-neon-lime"
-        levelNumber={4}
-        levelTitle="ACADEMIC QUEST"
       >
         <motion.div
           initial={{ opacity: 0 }}

@@ -49,8 +49,6 @@ export default function SceneAmazon({ onComplete }: SceneAmazonProps) {
         id="amazon"
         gradientFrom="from-neon-lime"
         gradientTo="to-neon-lime"
-        levelNumber={5}
-        levelTitle="CORPORATE INFILTRATION"
       >
         <motion.div
           initial={{ opacity: 0 }}

@@ -50,8 +50,6 @@ export default function SceneAbacus({ onComplete }: SceneAbacusProps) {
         id="abacus"
         gradientFrom="from-neon-lime"
         gradientTo="to-neon-lime"
-        levelNumber={3}
-        levelTitle="THE ABACUS TRIALS"
       >
         <motion.div
           initial={{ opacity: 0 }}

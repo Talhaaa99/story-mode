@@ -47,8 +47,6 @@ export default function SceneIntro({ onComplete }: SceneIntroProps) {
         id="birth"
         gradientFrom="from-neon-lime"
         gradientTo="to-neon-lime"
-        levelNumber={1}
-        levelTitle="THE ORIGIN STORY"
       >
         <motion.div
           initial={{ opacity: 0 }}

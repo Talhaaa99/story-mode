@@ -43,8 +43,6 @@ export default function SceneCars({ onComplete }: SceneCarsProps) {
         id="cars"
         gradientFrom="from-neon-lime"
         gradientTo="to-neon-lime"
-        levelNumber={2}
-        levelTitle="VEHICLE OBSESSION"
       >
         <motion.div
           initial={{ opacity: 0 }}

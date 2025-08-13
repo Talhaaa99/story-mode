@@ -38,6 +38,9 @@ export default function Home() {
   const [showCurtain, setShowCurtain] = useState(false);
   const [currentLevel, setCurrentLevel] = useState(0);
   const [curtainShown, setCurtainShown] = useState<Set<string>>(new Set());
+  const [contentRevealed, setContentRevealed] = useState<Set<string>>(
+    new Set()
+  );
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -68,9 +71,10 @@ export default function Home() {
                 setShowCurtain(true);
                 setCurtainShown((prev) => new Set([...prev, sectionId]));
 
-                // Hide curtain after animation
+                // Hide curtain after animation and reveal content
                 setTimeout(() => {
                   setShowCurtain(false);
+                  setContentRevealed((prev) => new Set([...prev, sectionId]));
                 }, 2000);
               }
             }
@@ -179,39 +183,131 @@ export default function Home() {
 
         {/* Level Sections */}
         <section id="birth" className="h-screen snap-start">
-          <SceneIntro onComplete={() => handleLevelComplete("birth")} />
+          {contentRevealed.has("birth") ? (
+            <SceneIntro onComplete={() => handleLevelComplete("birth")} />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section id="cars" className="h-screen snap-start">
-          <SceneCars onComplete={() => handleLevelComplete("cars")} />
+          {contentRevealed.has("cars") ? (
+            <SceneCars onComplete={() => handleLevelComplete("cars")} />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section id="abacus" className="h-screen snap-start">
-          <SceneAbacus onComplete={() => handleLevelComplete("abacus")} />
+          {contentRevealed.has("abacus") ? (
+            <SceneAbacus onComplete={() => handleLevelComplete("abacus")} />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section id="college" className="h-screen snap-start">
-          <SceneCollege onComplete={() => handleLevelComplete("college")} />
+          {contentRevealed.has("college") ? (
+            <SceneCollege onComplete={() => handleLevelComplete("college")} />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section id="amazon" className="h-screen snap-start">
-          <SceneAmazon onComplete={() => handleLevelComplete("amazon")} />
+          {contentRevealed.has("amazon") ? (
+            <SceneAmazon onComplete={() => handleLevelComplete("amazon")} />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section id="frontend" className="h-screen snap-start">
-          <SceneFrontend onComplete={() => handleLevelComplete("frontend")} />
+          {contentRevealed.has("frontend") ? (
+            <SceneFrontend onComplete={() => handleLevelComplete("frontend")} />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section id="web3" className="h-screen snap-start">
-          <SceneWeb3 onComplete={() => handleLevelComplete("web3")} />
+          {contentRevealed.has("web3") ? (
+            <SceneWeb3 onComplete={() => handleLevelComplete("web3")} />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section id="farcaster" className="h-screen snap-start">
-          <SceneFarcaster onComplete={() => handleLevelComplete("farcaster")} />
+          {contentRevealed.has("farcaster") ? (
+            <SceneFarcaster
+              onComplete={() => handleLevelComplete("farcaster")}
+            />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section id="present" className="h-screen snap-start">
-          <ScenePresent onComplete={() => handleLevelComplete("present")} />
+          {contentRevealed.has("present") ? (
+            <ScenePresent onComplete={() => handleLevelComplete("present")} />
+          ) : (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-neon-lime font-chakra-petch text-xl">
+                  Loading mission data...
+                </div>
+              </div>
+            </div>
+          )}
         </section>
       </div>
 

@@ -7,6 +7,22 @@ interface LevelCurtainProps {
 }
 
 export default function LevelCurtain({ level }: LevelCurtainProps) {
+  // Get level title based on level number
+  const getLevelTitle = (levelNum: number) => {
+    const titles = {
+      1: "THE ORIGIN STORY",
+      2: "VEHICLE OBSESSION",
+      3: "THE ABACUS TRIALS",
+      4: "ACADEMIC QUEST",
+      5: "CORPORATE INFILTRATION",
+      6: "FRONTEND AWAKENING",
+      7: "WEB3 ADVENTURE",
+      8: "DECENTRALIZED SOCIAL",
+      9: "FINAL MISSION",
+    };
+    return titles[levelNum as keyof typeof titles] || "MISSION";
+  };
+
   return (
     <motion.div
       className="fixed inset-0 z-40 pointer-events-none"
@@ -56,7 +72,7 @@ export default function LevelCurtain({ level }: LevelCurtainProps) {
                 ease: "easeOut",
               }}
             >
-              MISSION INITIALIZING...
+              {getLevelTitle(level)}
             </motion.div>
           </motion.div>
         </div>
